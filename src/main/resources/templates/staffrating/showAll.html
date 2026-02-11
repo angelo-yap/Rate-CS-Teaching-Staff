@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=j, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"></head>
+<body>
+    <main class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <h1>RATINGS</h1>
+                <ul>
+                    <li th:each="ratings:${rt}">
+                        <span th:text="${ratings.name}"></span> <br>
+                        <span th:text="${ratings.comment}"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

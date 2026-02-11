@@ -2,8 +2,13 @@ package com.assignment2.ratestaff.models;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.*;
+@Entity
+@Table(name="staff_ratings")
 public class StaffRating {
     // Auto-generated ID
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String email;
