@@ -1,0 +1,99 @@
+package com.assignment2.ratestaff.models;
+
+import java.time.LocalDateTime;
+
+public class StaffRating {
+    // Auto-generated ID
+    private Long id;
+    private String name;
+    private String email;
+    private RoleType roleType;
+    private int clarity;
+    private int knowledgeableScore;
+    private String comment;
+    private LocalDateTime createdAt;
+
+    public StaffRating(String name, String email, RoleType roleType, int clarity, int knowledgeableScore,
+            String comment) {
+        this.name = name;
+        this.email = email;
+        this.roleType = roleType;
+        this.clarity = clarity;
+        this.knowledgeableScore = knowledgeableScore;
+        this.comment = comment;
+    }
+    
+    // dummy
+
+    public StaffRating(){
+        name = "John Doe";
+        email = "test@email.com";
+        roleType = RoleType.PROF;
+        clarity = 10;
+        knowledgeableScore = 0;
+        comment = "Dummy Rating Used for Testing Purposes";
+    }
+    
+    private LocalDateTime updatedAt;
+
+    //Setters & Getters
+
+    public Long getId() {
+        return id;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public RoleType getRoleType() {
+        return roleType;
+    }
+    public void setRoleType(RoleType roleType) {
+        this.roleType = roleType;
+    }
+    public int getClarity() {
+        return clarity;
+    }
+    public void setClarity(int clarity) {
+        this.clarity = clarity;
+    }
+    public int getKnowledgeableScore() {
+        return knowledgeableScore;
+    }
+    public void setKnowledgeableScore(int knowledgeableScore) {
+        this.knowledgeableScore = knowledgeableScore;
+    }
+    public String getComment() {
+        return comment;
+    }
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+    
+    //might not need this
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+    
+
+    
+
+}
