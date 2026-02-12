@@ -9,6 +9,9 @@ import com.assignment2.ratestaff.design.StaffProfile;
 import com.assignment2.ratestaff.design.TaProfile;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name="staff_ratings")
 public class StaffRating {
@@ -16,11 +19,36 @@ public class StaffRating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @NotNull(message = "Name is required")
+    @Column(nullable = false)
     private String name;
+
+    @NotNull(message = "Email is required")
+    @Column(nullable = false, unique = true)
     private String email;
+    
+    @NotNull(message = "Role is required")
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private RoleType roleType;
+    
+    @NotNull(message = "Clarity is required")
+    @Min(value = 1, message = "Clarity must be between 1 and 10")
+    @Max(value = 10, message = "Clarity must be between 1 and 10")
+    @Column(nullable = false)
     private int clarity;
+
+    @NotNull(message = "Niceness is required")
+    @Min(value = 1, message = "Niceness must be between 1 and 10")
+    @Max(value = 10, message = "Niceness must be between 1 and 10")
+    @Column(nullable = false)
     private int niceness;
+
+    @NotNull(message = "Knowledgeable score is required")
+    @Min(value = 1, message = "Knowledgeable score must be between 1 and 10")
+    @Max(value = 10, message = "Knowledgeable score must be between 1 and 10")
+    @Column(nullable = false)
     private int knowledgeableScore;
     private String comment;
     private LocalDateTime createdAt;
@@ -38,17 +66,8 @@ public class StaffRating {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
-    
-    // dummy
 
-    public StaffRating(){
-        name = "John Doe";
-        email = "test@email.com";
-        roleType = RoleType.PROF;
-        clarity = 10;
-        knowledgeableScore = 0;
-        comment = "Dummy Rating Used for Testing Purposes";
-    }
+    public StaffRating(){}
     
 
     //Setters & Getters
@@ -130,6 +149,18 @@ public class StaffRating {
     @Transient
     public double getOverallScore() {
         return (clarity + niceness + knowledgeableScore) / 3.0;
+    }
+
+    @PrePersist
+    public void onCreate() {
+        LocalDateTime now = LocalDateTime.now();
+        this.createdAt = now;
+        this.updatedAt = now;
+    }
+    
+    @PreUpdate
+    public void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
     }
 
 }

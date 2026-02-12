@@ -10,10 +10,9 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-4 border rounded p-3 shadow-lg">
-                <h1 class="text-center mt-5 mb-4">Rate CS Teaching Staff</h1>
-                <!-- dont forget to update this href when changing to template page  -->
-                <div class="d-grid gap-2">
-                    <a class="btn btn-primary shadow" th:href="@{/create.html}">Create Rating</a>
+                <div class="d-flex flex-column align-items-center mb-4">
+                    <h1 class="text-center mt-5 mb-4">Rate CS Teaching Staff</h1>
+                    <a class="btn btn-outline-secondary shadow w-auto" th:href="@{/ratings/new}">Create Rating</a>
                 </div>
 
                 <h2 class="text-center mt-5 mb-4">Staff Ratings Summary</h2>

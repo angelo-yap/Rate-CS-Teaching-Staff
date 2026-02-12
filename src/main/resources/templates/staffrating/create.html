@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Ratingt</title>
+    <title>Create Rating</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"></head>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-4 border rounded p-3 shadow-lg">
-                <h1 class="text-center mt-5 mb-4">Create Rating</h1>
-                <form th:action="@{/ratings/add}" th:object="${staffRating}" method="post">
+                <div class="d-flex flex-column align-items-center mb-4">
+                    <h1 class="text-center mt-5 mb-4">Add New Rating</h1>
+                    <a class="btn btn-outline-secondary shadow w-auto" th:href="@{/ratings}">Home</a>
+                </div>
+
+                <form th:action="@{/ratings/add}" th:object="${staffRating}" method="post" class="p-3">
                     <div class="mb-3">
 
                         <label for="name" class="form-label">Name: </label>
@@ -21,14 +25,14 @@
                     <div class="mb-3">
 
                         <label for="email" class="form-label">Email: </label>
-                        <input type="email" id="email" th:field="*{email}" class="form-control form-control-lg" placeholder="johndoe@email.com">
+                        <input type="email" id="email" th:field="*{email}" class="form-control form-control-lg" placeholder="example@email.com">
                     </div>
 
                     <div class="mb-3">
                         <label for="roletype" class="form-label">Role: </label>    
                         <select type="roleType" id="roleType" th:field="*{roleType}" class="form-select form-select-lg">
                             <option value="" disabled>Select Role</option>
-                            <option th:each="role:${roleTypes}" th:value="${role}" th:text="${role}"></option>
+                            <option th:each="role:${roleTypes}" th:value="${role}" th:text="${role.label}"></option>
                         </select>
                     </div>
 
@@ -66,7 +70,7 @@
 
                     <!-- Submit button -->
                     <div class="d-grid gap-2">
-                        <input class="btn btn-primary" type="submit" value="SEND">
+                        <button class="btn btn-primary" type="submit">Submit Rating</button>
                     </div>
                     
                 </form>

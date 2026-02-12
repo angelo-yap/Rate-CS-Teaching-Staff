@@ -7,19 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.assignment2.ratestaff.models.StaffRating;
 import com.assignment2.ratestaff.models.RatingsRepository;
 import com.assignment2.ratestaff.models.RoleType;
-import com.assignment2.ratestaff.models.StaffMemberProfile;
 
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
@@ -53,19 +57,16 @@ public class StaffRatingController{
         return "staffrating/create";
     }
     
-    // TODO: MAKE IT NOT STATIC
     @PostMapping("/ratings/add")
-    public String addRating(@RequestParam Map<String, String> newrating, HttpServletResponse response) {
-        System.out.println("ADD Rating");
-        String newName = newrating.get("name");
-        String newEmail = newrating.get("email");
-        RoleType newRoleType = RoleType.valueOf(newrating.get("roletype"));
-        int newClarity = Integer.parseInt(newrating.get("clarity"));
-        int newNiceness = Integer.parseInt(newrating.get("niceness"));
-        int newKnowledgeableScore = Integer.parseInt(newrating.get("knowledgeable-score"));
-
-        ratingRepo.save(new StaffRating(newName, newEmail, newRoleType, newClarity, newNiceness, newKnowledgeableScore, ""));
-        return "ratings/addedRating";
+    public String postMethodName(@Valid @ModelAttribute("staffRating") StaffRating staffRating, BindingResult result, Model model) {
+        
+        if (result.hasErrors()) {
+            model.addAttribute("roleTypes", RoleType.values());
+            return "staffrating/create";
+        }
+        
+        ratingRepo.save(staffRating);
+        return "redirect:/ratings";
     }
     
     @GetMapping("/ratings/{id}")
