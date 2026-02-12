@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Ratingt</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"></head>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-4 border rounded p-3 shadow-lg">
+                <h1 class="text-center mt-5 mb-4">Create Rating</h1>
+                <form action="/ratings/add" method="post">
+                    <div class="mb-3">
+
+                        <label for="name" class="form-label">Name: </label>
+                        <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="First and Last name">
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="email" class="form-label">Email: </label>
+                        <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="johndoe@email.com">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="roletype" class="form-label">Role: </label>    
+                        <select type="roletype" id="roletype" name="roletype" class="form-select form-select-lg">
+                            <option value="" disabled>Select Role</option>
+                            <option value="TA">Teaching Assistant</option>
+                            <option value="PROF">Professor</option>
+                            <option value="INSTRUCTOR">Instructor</option>
+                            <option value="STAFF">Staff</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="clarity" class="form-label">Clarity: </label>
+                        <output id="clarity-out">1</output>
+                        <input type="range" min="1" max="10" step="1" value="1" oninput="document.getElementById('clarity-out').innerText = this.value" id="clarity" name="clarity" class="form-range">
+                        <div class="d-flex justify-content-between small text-muted">
+                            <span>1</span><span>10</span>
+                        </div>
+                    </div>
+                                        
+                    <div class="mb-3">
+
+                        <label for="niceness" class="form-label">Niceness: </label>
+                        <output id="niceness-out">1</output>
+                        <input type="range" min="1" max="10" step="1" value="1" oninput="document.getElementById('niceness-out').innerText = this.value" id="niceness" name="niceness" class="form-range">
+                        <div class="d-flex justify-content-between small text-muted">
+                            <span>1</span><span>10</span>
+                        </div>
+                    </div>
+                                        
+                    <div class="mb-3">
+
+                        <label for="knowledgeable-score" class="form-label">Knowledgeable Score: </label>
+                        <output id="knowledgeable-score-out">1</output>
+                        <input type="range" min="1" max="10" step="1" value="1" oninput="document.getElementById('knowledgeable-score-out').innerText = this.value" id="knowledgeable-score" name="knowledgeable-score" class="form-range">
+                        <div class="d-flex justify-content-between small text-muted">
+                            <span>1</span><span>10</span>
+                        </div>
+                    </div>
+                    
+                    
+
+                    <!-- Submit button -->
+                    <div class="d-grid gap-2">
+                        <input class="btn btn-primary" type="submit" value="SEND">
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

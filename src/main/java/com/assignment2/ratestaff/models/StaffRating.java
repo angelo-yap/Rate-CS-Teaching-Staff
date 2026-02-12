@@ -14,18 +14,23 @@ public class StaffRating {
     private String email;
     private RoleType roleType;
     private int clarity;
+    private int niceness;
     private int knowledgeableScore;
     private String comment;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
-    public StaffRating(String name, String email, RoleType roleType, int clarity, int knowledgeableScore,
+    public StaffRating(String name, String email, RoleType roleType, int clarity, int niceness, int knowledgeableScore,
             String comment) {
         this.name = name;
         this.email = email;
         this.roleType = roleType;
         this.clarity = clarity;
+        this.niceness = niceness;
         this.knowledgeableScore = knowledgeableScore;
         this.comment = comment;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
     
     // dummy
@@ -39,7 +44,6 @@ public class StaffRating {
         comment = "Dummy Rating Used for Testing Purposes";
     }
     
-    private LocalDateTime updatedAt;
 
     //Setters & Getters
 
@@ -86,6 +90,14 @@ public class StaffRating {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+    public int getNiceness() {
+        return niceness;
+    }
+
+    public void setNiceness(int niceness) {
+        this.niceness = niceness;
+    }
+
     
     //might not need this
     public void setCreatedAt(LocalDateTime createdAt) {
