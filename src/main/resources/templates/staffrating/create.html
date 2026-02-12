@@ -11,27 +11,24 @@
         <div class="row justify-content-center">
             <div class="col-md-4 border rounded p-3 shadow-lg">
                 <h1 class="text-center mt-5 mb-4">Create Rating</h1>
-                <form action="/ratings/add" method="post">
+                <form th:action="@{/ratings/add}" th:object="${staffRating}" method="post">
                     <div class="mb-3">
 
                         <label for="name" class="form-label">Name: </label>
-                        <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="First and Last name">
+                        <input type="text" id="name" th:field="*{name}" class="form-control form-control-lg" placeholder="First and Last name">
                     </div>
 
                     <div class="mb-3">
 
                         <label for="email" class="form-label">Email: </label>
-                        <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="johndoe@email.com">
+                        <input type="email" id="email" th:field="*{email}" class="form-control form-control-lg" placeholder="johndoe@email.com">
                     </div>
 
                     <div class="mb-3">
                         <label for="roletype" class="form-label">Role: </label>    
-                        <select type="roletype" id="roletype" name="roletype" class="form-select form-select-lg">
+                        <select type="roleType" id="roleType" th:field="*{roleType}" class="form-select form-select-lg">
                             <option value="" disabled>Select Role</option>
-                            <option value="TA">Teaching Assistant</option>
-                            <option value="PROF">Professor</option>
-                            <option value="INSTRUCTOR">Instructor</option>
-                            <option value="STAFF">Staff</option>
+                            <option th:each="role:${roleTypes}" th:value="${role}" th:text="${role}"></option>
                         </select>
                     </div>
 
@@ -39,7 +36,7 @@
 
                         <label for="clarity" class="form-label">Clarity: </label>
                         <output id="clarity-out">1</output>
-                        <input type="range" min="1" max="10" step="1" value="1" oninput="document.getElementById('clarity-out').innerText = this.value" id="clarity" name="clarity" class="form-range">
+                        <input type="range" min="1" max="10" step="1" value="1" oninput="document.getElementById('clarity-out').innerText = this.value" id="clarity" th:field="*{clarity}" class="form-range">
                         <div class="d-flex justify-content-between small text-muted">
                             <span>1</span><span>10</span>
                         </div>
@@ -49,7 +46,7 @@
 
                         <label for="niceness" class="form-label">Niceness: </label>
                         <output id="niceness-out">1</output>
-                        <input type="range" min="1" max="10" step="1" value="1" oninput="document.getElementById('niceness-out').innerText = this.value" id="niceness" name="niceness" class="form-range">
+                        <input type="range" min="1" max="10" step="1" value="1" oninput="document.getElementById('niceness-out').innerText = this.value" id="niceness" th:field="*{niceness}" class="form-range">
                         <div class="d-flex justify-content-between small text-muted">
                             <span>1</span><span>10</span>
                         </div>
@@ -57,9 +54,9 @@
                                         
                     <div class="mb-3">
 
-                        <label for="knowledgeable-score" class="form-label">Knowledgeable Score: </label>
-                        <output id="knowledgeable-score-out">1</output>
-                        <input type="range" min="1" max="10" step="1" value="1" oninput="document.getElementById('knowledgeable-score-out').innerText = this.value" id="knowledgeable-score" name="knowledgeable-score" class="form-range">
+                        <label for="knowledgeableScore" class="form-label">Knowledgeable Score: </label>
+                        <output id="knowledgeableScore-out">1</output>
+                        <input type="range" min="1" max="10" step="1" value="1" oninput="document.getElementById('knowledgeableScore-out').innerText = this.value" id="knowledgeableScore" th:field="knowledgeableScore" class="form-range">
                         <div class="d-flex justify-content-between small text-muted">
                             <span>1</span><span>10</span>
                         </div>

@@ -11,9 +11,9 @@
             <div class="col-md-4">
                 <h1>RATINGS</h1>
                 <ul>
-                    <li th:each="ratings:${rt}">
-                        <span th:text="${ratings.name}"></span> <br>
-                        <span th:text="${ratings.comment}"></span>
+                    <li th:each="rating:${ratings}">
+                        <span th:text="${rating.name}"></span> <br>
+                        <span th:text="${rt.comment}"></span>
                     </li>
                 </ul>
             </div>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate CS Teaching Staff</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"></head>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-4 border rounded p-3 shadow-lg">
+                <h1 class="text-center mt-5 mb-4">Rate CS Teaching Staff</h1>
+                <!-- dont forget to update this href when changing to template page  -->
+                <div class="d-grid gap-2">
+                    <a class="btn btn-primary shadow" th:href="@{/create.html}">Create Rating</a>
+                </div>
+
+                <h2 class="text-center mt-5 mb-4">Staff Ratings Summary</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle shadow">
+                        <thread>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th class="text-end">Overall</th>
+                            </tr>
+                        </thread>
+                        
+                        <tbody>
+                            <tr th:each="rating:${ratings}" th:onclick="|location='@{/ratings/{id}(id=${rating.id})}'|">
+                                <td th:text="${rating.name}">John Doe</td>
+                                <td th:text="${rating.email}">johnd@sfu.ca</td> 
+                                <td th:text="${rating.getDisplayTitle()}">Professor</td>
+                                <td class="text-end" th:text="${#numbers.formatDecimal(rating.overallScore, 1, 1)}">7.3</td>
+                            </tr>
+                                
+                        </tbody>
+                    </table>
+                </div>
+            </div> 
+        </div>
+    </div>
+</body>
+</html>

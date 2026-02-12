@@ -2,6 +2,12 @@ package com.assignment2.ratestaff.models;
 
 import java.time.LocalDateTime;
 
+import com.assignment2.ratestaff.design.InstructorProfile;
+import com.assignment2.ratestaff.design.ProfProfile;
+import com.assignment2.ratestaff.design.StaffMemberProfile;
+import com.assignment2.ratestaff.design.StaffProfile;
+import com.assignment2.ratestaff.design.TaProfile;
+
 import jakarta.persistence.*;
 @Entity
 @Table(name="staff_ratings")
@@ -110,7 +116,20 @@ public class StaffRating {
         this.updatedAt = updatedAt;
     }
     
-
+    @Transient
+    public String getDisplayTitle() {
+        StaffMemberProfile p = switch (roleType) {
+            case TA -> new TaProfile();
+            case PROF -> new ProfProfile();
+            case INSTRUCTOR -> new InstructorProfile();
+            case STAFF -> new StaffProfile();
+        };
+        return p.displayTitle();
+    }
     
+    @Transient
+    public double getOverallScore() {
+        return (clarity + niceness + knowledgeableScore) / 3.0;
+    }
 
 }
