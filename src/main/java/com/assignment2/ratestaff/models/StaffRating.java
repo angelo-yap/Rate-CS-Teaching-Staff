@@ -31,7 +31,7 @@ public class StaffRating {
 
     @NotNull(message = "Email is required")
     @Email(message = "Email must be valid (e.g. name@sfu.ca)")
-    @Size(min = 1, message = "Email must not be blank.")
+    @NotBlank(message = "Email must not be blank.")
     @Column(nullable = false, unique = true)
     private String email;
     
