@@ -12,6 +12,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 @Entity
@@ -22,14 +23,15 @@ public class StaffRating {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotNull(message = "Name is required")
-    @Size(min = 1, max = 80, message = "Name must be at most")
+    @NotNull(message = "Name must not be blank.")
+    @NotBlank(message = "Name must not be blank.")
+    @Size(max = 80, message = "Name must be 80 characters or less.")
     @Column(nullable = false)
     private String name;
 
     @NotNull(message = "Email is required")
     @Email(message = "Email must be valid (e.g. name@sfu.ca)")
-    @Size(min = 1, message = "Email must not be empty")
+    @Size(min = 1, message = "Email must not be blank.")
     @Column(nullable = false, unique = true)
     private String email;
     
