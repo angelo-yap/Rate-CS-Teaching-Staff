@@ -9,9 +9,11 @@ import com.assignment2.ratestaff.design.StaffProfile;
 import com.assignment2.ratestaff.design.TaProfile;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 @Entity
 @Table(name="staff_ratings")
 public class StaffRating {
@@ -21,10 +23,13 @@ public class StaffRating {
     private Long id;
     
     @NotNull(message = "Name is required")
+    @Size(min = 1, max = 80, message = "Name must be at most")
     @Column(nullable = false)
     private String name;
 
     @NotNull(message = "Email is required")
+    @Email(message = "Email must be valid (e.g. name@sfu.ca)")
+    @Size(min = 1, message = "Email must not be empty")
     @Column(nullable = false, unique = true)
     private String email;
     

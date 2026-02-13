@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${rating.name}">Details</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"></head>
+    <title th:text="${staffRating.name}">Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
     <div class="container-fluid">
@@ -17,52 +17,52 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
 
-                        <h3 class="card-title mb-1" th:text="${rating.name}">John Doe</h3>
+                        <h3 class="card-title mb-1" th:text="${staffRating.name}">John Doe</h3>
                         <div class="text-muted mb-4">
-                            <span th:text="${rating.getDisplayTitle}">Professor</span>
+                            <span th:text="${staffRating.getDisplayTitle}">Professor</span>
                             <span>•</span>
-                            <span th:text="${rating.email}">johnd@sfu.ca</span>
+                            <span th:text="${staffRating.email}">johnd@sfu.ca</span>
                         </div>
                         <div class="row g-3 mb-4">
                             <div class="col-md-3">
                                 <div class="border rounded p-3 text-center w-100 h-100">
                                     <div class="small text-muted">Clarity</div>
-                                    <div class="fs-3 fw-semibold" th:text="${rating.clarity}">7</div>
+                                    <div class="fs-3 fw-semibold" th:text="${staffRating.clarity}">7</div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="border rounded p-3 text-center w-100 h-100">
                                     <div class="small text-muted">Niceness</div>
-                                    <div class="fs-3 fw-semibold" th:text="${rating.niceness}">8</div>
+                                    <div class="fs-3 fw-semibold" th:text="${staffRating.niceness}">8</div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="border rounded p-3 text-center w-100 h-100">
                                     <div class="small text-muted">Knowledge</div>
-                                    <div class="fs-3 fw-semibold" th:text="${rating.knowledgeableScore}">6</div>
+                                    <div class="fs-3 fw-semibold" th:text="${staffRating.knowledgeableScore}">6</div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="border rounded p-3 text-center w-100 h-100">
                                     <div class="small text-muted">Overall</div>
-                                    <div class="fs-3 fw-semibold" th:text="${#numbers.formatDecimal(rating.overallScore, 1, 1)}">7.0</div>
+                                    <div class="fs-3 fw-semibold" th:text="${#numbers.formatDecimal(staffRating.overallScore, 1, 1)}">7.0</div>
                                 </div>
                             </div>
                         </div>
                         <div class="mb-4">
                             <h5 class="mb-2">Comment</h5>
-                            <div class="border rounded p-3" th:text="${(rating.comment == null or #strings.isEmpty(rating.comment)) ? 'No comment' : rating.comment}">No comment</div>
+                            <div class="border rounded p-3" th:text="${(staffRating.comment == null or #strings.isEmpty(staffRating.comment)) ? 'No comment' : staffRating.comment}">No comment</div>
                         </div>
                         <p class="text-muted mb-1">
-                            Created: <span th:text="${#temporals.format(rating.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+                            Created: <span th:text="${#temporals.format(staffRating.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
                         </p>
                         <p class="text-muted">
-                            Updated: <span th:text="${#temporals.format(rating.updatedAt, 'yyyy-MM-dd HH:mm')}"></span>
+                            Updated: <span th:text="${#temporals.format(staffRating.updatedAt, 'yyyy-MM-dd HH:mm')}"></span>
                         </p>
                         <div class="d-flex gap-2">
-                            <a class="btn btn-primary" th:href="@{/ratings/{id}/edit(id=${rating.id})}">Edit</a>
+                            <a class="btn btn-primary" th:href="@{/ratings/{id}/edit(id=${staffRating.id})}">Edit</a>
                             
-                            <form th:action="@{/ratings/{id}/delete(id=${rating.id})}" method="post" class="m-0">
+                            <form th:action="@{/ratings/{id}/delete(id=${staffRating.id})}" method="post" class="m-0">
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this rating?')">Delete</button>
                             </form>
                         </div>

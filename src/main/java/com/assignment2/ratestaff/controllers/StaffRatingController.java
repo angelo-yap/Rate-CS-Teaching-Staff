@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,17 +40,6 @@ public class StaffRatingController{
         return "staffrating/index";
     }
 
-    @GetMapping("/ratings/view")
-    public String getAllUsers(Model model){
-        System.out.println("Getting all users");
-        
-        List<StaffRating> staffRatings = ratingRepo.findAll();    
-        // end of database call 
-         
-        model.addAttribute("rt", staffRatings);
-        return "staffrating/showAll";
-    }
-
     @GetMapping("/ratings/new")
     public String showCreateForm(Model model) {
         model.addAttribute("staffRating", new StaffRating());
@@ -59,21 +49,77 @@ public class StaffRatingController{
     
     @PostMapping("/ratings/add")
     public String postMethodName(@Valid @ModelAttribute("staffRating") StaffRating staffRating, BindingResult result, Model model) {
+
+        // TODO: ADD VALIDATION FOR UNIQUE EMAIL
+        System.out.println("EMAIL RECEIVED: " + staffRating.getEmail());
         
         if (result.hasErrors()) {
             model.addAttribute("roleTypes", RoleType.values());
             return "staffrating/create";
         }
-        
-        ratingRepo.save(staffRating);
-        return "redirect:/ratings";
+        try{
+            ratingRepo.save(staffRating);
+            return "redirect:/ratings";
+        }catch (DataIntegrityViolationException e){
+            result.rejectValue("email", "duplicate", "This email is already in use.");
+            model.addAttribute("roleTypes", RoleType.values());
+            return "staffrating/create";
+        }
     }
     
     @GetMapping("/ratings/{id}")
     public String showDetails(@PathVariable Long id, Model model) {
-        System.out.println("Showing Rating Details");
+        System.out.println("Showing Rating Details for id " + id);
         StaffRating rating = ratingRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Rating not found"));
-        model.addAttribute("rating",rating);
+        model.addAttribute("staffRating",rating);
         return "staffrating/details";
     }
+
+    @GetMapping("/ratings/{id}/edit")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        System.out.println("Editing rating details for id " + id);
+        StaffRating rating = ratingRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Rating not found"));
+        model.addAttribute("staffRating",rating);
+        model.addAttribute("roleTypes", RoleType.values());
+        return "staffrating/edit";
+    }
+
+    @PostMapping("/ratings/{id}/edit")
+    public String updateRating(@PathVariable Long id, @Valid @ModelAttribute("staffRating") StaffRating staffRating, BindingResult result, Model model) {
+        
+        if (result.hasErrors()) {
+            model.addAttribute("roleTypes", RoleType.values());
+            return "staffrating/edit";
+        }
+
+        StaffRating rating = ratingRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Rating not found"));
+
+        rating.setName(staffRating.getName());
+        rating.setEmail(staffRating.getEmail());
+        rating.setRoleType(staffRating.getRoleType());
+        rating.setClarity(staffRating.getClarity());
+        rating.setNiceness(staffRating.getNiceness());
+        rating.setKnowledgeableScore(staffRating.getKnowledgeableScore());
+        rating.setComment(staffRating.getComment());
+
+        try {
+            ratingRepo.save(rating);
+            return "redirect:/ratings/" + id;
+        }catch (DataIntegrityViolationException e){
+            result.rejectValue("email", "duplicate", "That email already belongs to another user.");
+            model.addAttribute("roleTypes", RoleType.values());
+            return "staffRating/edit";
+        }
+    }
+    @PostMapping("/ratings/{id}/delete")
+    public String deleteRating(@PathVariable Long id) {
+        
+        if (!ratingRepo.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Rating not found");
+        }
+        
+        ratingRepo.deleteById(id);;
+        return "redirect:/ratings";
+    }
+    
 }
