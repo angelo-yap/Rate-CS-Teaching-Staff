@@ -17,7 +17,7 @@ git clone https://github.com/angelo-yap/Rate-CS-Teaching-Staff.git
 ### Create .env file
 - Add variables
 ```bash
-DB_URL = jdbc:postgresql://dbg (paste external url starting from dbg)
+DB_URL = jdbc:postgresql://dbg (paste external url after @dbg)
 DB_USER = (database username)
 DB_PASS = (database password)
 ```
@@ -38,7 +38,7 @@ set +a
 ### Create Render PostgreSQL database
 - Dashboard → New service → Postgres
   - Make sure PostgreSQL version is set to the latest version 
-- edit .env variables accordingly to match database credentials
+- edit .env variables accordingly to match database credentials using **internal URL instead of external**
 
 ### Create Render web service
 - Dashboard → New service → Web Service
