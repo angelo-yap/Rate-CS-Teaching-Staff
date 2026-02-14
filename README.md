@@ -15,15 +15,14 @@ git clone https://github.com/angelo-yap/Rate-CS-Teaching-Staff.git
 ```
 
 ### Create .env file
--Add variables
+- Add variables
 ```bash
 DB_URL = jdbc:postgresql://dbg (paste external url starting from dbg)
 DB_USER = (database username)
 DB_PASS = (database password)
 ```
 
-[!WARNING]
-Add .env to .gitignore to prevent your database information being committed
+[!WARNING] Add .env to .gitignore to prevent your database information being committed
 
 ### Load environment variables & run
 ```bash
