@@ -1,5 +1,8 @@
 package com.assignment2.ratestaff.models;
 
+/**
+ *  Enum class to represent the roleType of a staff member.
+ */
 public enum RoleType {
     TA("Teaching Assistant"),
     PROF("Professor"),
