@@ -3,6 +3,15 @@
 This project uses slice tests as they only load specific parts of Spring needed for the feature being tested,
 which keeps the tests quick and easy to debug.
 
+To run tests use
+```bash
+./mvnw test
+```
+or a specific test
+```bash
+./mvnw -Dtest=TestName test
+```
+
 ## Validation Tests (Bean Validation)
 
 - Tests server side validation for the StaffRating model using a Validator:
