@@ -22,7 +22,8 @@ DB_USER = (database username)
 DB_PASS = (database password)
 ```
 
-[!WARNING] Add .env to .gitignore to prevent your database information being committed
+> [!WARNING] 
+> Add .env to .gitignore to prevent your database information being committed
 
 ### Load environment variables & run
 ```bash
